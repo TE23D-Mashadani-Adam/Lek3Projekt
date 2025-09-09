@@ -5,7 +5,10 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         int[] passagerare = new int[20];
+
         int pris = 299;
+        int vinst = 0;
+        boolean avsluta = false;
 
         String[] meny = { "Lägg till en passagerare", "Skriv ut lediga platser", "Beräkna vinst",
                 "Avsluta programmet" };
@@ -14,7 +17,6 @@ public class App {
             for (int i = 0; i < meny.length; i++) {
                 System.out.println(i + 1 + ". " + meny[i]);
             }
-            scanner.nextLine();
             int val = 0;
 
             while (true) {
@@ -44,31 +46,49 @@ public class App {
                             scanner.nextLine();
                         }
                     }
-                    LäggTill(passagerare, perNummer);
+                    vinst = LäggTill(passagerare, perNummer, vinst, pris);
                     break;
 
-                default:
+                case 2:
+                    SkrivUt(passagerare);
                     break;
+
+                case 3:
+                    System.out.println(BeräknaVinst(vinst));
+                    break;
+                default:
+                    avsluta = true;
+                    break;
+            }
+            if (avsluta) {
+                System.out.println("Program avslutad!");
+                break;
             }
         }
 
     }
 
-    static void LäggTill(int[] passagerare, int perNummer) {
+    static int LäggTill(int[] passagerare, int perNummer, int vinst, int pris) {
         for (int i = 0; i < passagerare.length; i++) {
             if (passagerare[i] == 0) {
                 passagerare[i] = perNummer;
+                vinst += pris;
                 break;
             }
             if (i == passagerare.length - 1) {
                 System.out.println("Inga platser kvar");
             }
         }
+        return vinst;
     }
 
     static void SkrivUt(int[] passagerare) {
         for (int i = 0; i < passagerare.length; i++) {
             System.out.println(i + 1 + ". " + passagerare[i]);
         }
+    }
+
+    static int BeräknaVinst(int vinst) {
+        return vinst;
     }
 }
