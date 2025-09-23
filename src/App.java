@@ -175,13 +175,14 @@ public class App {
 
     static int Avboka(Passagerare[] passagerare, int perNummer, int vinst) {
         for (int i = 0; i < passagerare.length; i++) {
-            if (perNummer == passagerare[i].personnummer) {
-                vinst -= passagerare[i].prisKlass;
-                passagerare[i] = null;
-                System.out.println("Avbokning genomförd! Välkommen åter");
-                break;
-            }
-            if (i == passagerare.length - 1) {
+            if (passagerare[i] != null) {
+                if (perNummer == passagerare[i].personnummer) {
+                    vinst -= passagerare[i].prisKlass;
+                    passagerare[i] = null;
+                    System.out.println("Avbokning genomförd! Välkommen åter");
+                    break;
+                }
+            } else if (i == passagerare.length - 1) {
                 System.out.println("Du har ingen plats registrerat med denna personnummer på bussen");
             }
         }
